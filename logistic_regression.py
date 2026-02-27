@@ -17,8 +17,10 @@ def predict(X, weights, bias):
 def compute_loss(X, y, weights, bias):
     m = len(y)
     probs = predict_proba(X, weights, bias)
-    loss = - (1/m) * np.sum(
+
+    loss = - (1 / m) * np.sum(
         y * np.log(probs + 1e-9) +
         (1 - y) * np.log(1 - probs + 1e-9)
     )
+
     return loss

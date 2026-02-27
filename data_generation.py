@@ -14,16 +14,18 @@ def generate_sine_signal(freq, amplitude, length, noise_level=0.1):
 def generate_dataset(n_samples=200, length=100):
     """
     Generate synthetic dataset with two classes:
-    - Class 0: Low frequency signals
-    - Class 1: High frequency signals
+    Class 0 → Low frequency
+    Class 1 → High frequency
     """
     X = []
     y = []
 
     for _ in range(n_samples):
+        # Class 0
         X.append(generate_sine_signal(freq=2, amplitude=1, length=length))
         y.append(0)
 
+        # Class 1
         X.append(generate_sine_signal(freq=8, amplitude=1, length=length))
         y.append(1)
 

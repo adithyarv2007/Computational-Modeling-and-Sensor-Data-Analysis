@@ -2,23 +2,34 @@ import numpy as np
 
 
 def extract_features(signal):
-    """
-    Extract statistical and frequency-domain features from signal.
-    """
     mean = np.mean(signal)
     std = np.std(signal)
-    max_val = np.max(signal)
-    min_val = np.min(signal)
+    energy = np.sum(signal ** 2)
 
     fft = np.fft.fft(signal)
-    dominant_freq = np.argmax(np.abs(fft))
+    freqs = np.fft.fftfreq(len(signal))
 
-    return np.array([mean, std, max_val, min_val, dominant_freq])
+    magnitude = np.abs(fft)
+
+    dominant_frequency = freqs[np.argmax(magnitude)]
+
+    spectral_energy = np.sum(magnitude ** 2)
+
+    return np.array([
+        mean,
+        std,
+        energy,
+        dominant_frequency,
+        spectral_energy
+    ])
 
 
 def transform_dataset(X):
-    """
-    Transform raw signal dataset into feature matrix.
-    """
-    features = [extract_features(signal) for signal in X]
-    return np.array(features)
+    features = np.array([extract_features(signal) for signal in X])
+
+    # Standardization (critical for gradient descent)
+    mean = np.mean(features, axis=0)
+    std = np.std(features, axis=0) + 1e-9
+    features = (features - mean) / std
+
+    return features
