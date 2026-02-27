@@ -51,6 +51,12 @@ Model performance is assessed using:
 - Confusion matrix
 - Training loss convergence visualization
 
+## Evaluation Strategy
+
+For simplicity, evaluation is performed on the generated dataset itself to analyze convergence behaviour and feature separability under controlled conditions. 
+
+The project structure is modular and can be easily extended to incorporate proper train–test splits, cross-validation, or real-world sensor datasets without modification to the optimization pipeline.
+
 ---
 ## Repository Structure
 
@@ -126,6 +132,32 @@ This will:
 5. Display convergence plot
 
 ---
+
+## Why This Project
+
+This project was intentionally implemented without relying on high-level machine learning libraries in order to emphasize mathematical transparency and algorithmic reasoning.
+
+Rather than maximizing performance through pre-built abstractions, the objective was to:
+
+- Explicitly formulate logistic regression from first principles
+- Implement gradient descent manually
+- Examine convergence behaviour numerically
+- Analyze the impact of feature scaling and conditioning
+- Explore the relationship between signal-domain characteristics and linear separability
+
+The goal was not merely classification accuracy, but controlled modeling, optimization understanding, and signal-domain feature engineering.
+
+## Observations
+
+During experimentation, several important insights emerged:
+
+- Feature scaling critically affects gradient descent stability and convergence.
+- Time-domain statistics alone were insufficient for class separability.
+- Incorporating frequency-domain and energy-based spectral features significantly improved discriminability.
+- Logistic regression converges to a non-zero loss due to imperfect linear separability of the engineered features.
+- Numerical conditioning plays a central role in optimization performance.
+
+These observations reinforce the importance of mathematical reasoning in applied machine learning workflows.
 
 ## Notes
 
